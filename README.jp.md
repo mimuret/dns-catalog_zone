@@ -1,5 +1,5 @@
 # Dns::CatlogZone
-
+[![Build Status](https://travis-ci.org/mimuret/dns-catlog_zone.svg?branch=master)](https://travis-ci.org/mimuret/dns-catlog_zone)
 [![Coverage Status](https://coveralls.io/repos/github/mimuret/dns-catlog_zone/badge.svg?branch=master)](https://coveralls.io/github/mimuret/dns-catlog_zone?branch=master)
 
 PoC of Catlog zone (draft-muks-dnsop-dns-catalog-zones)
