@@ -1,0 +1,91 @@
+; zone catalog.429e2e1756e63122d795ee1990437435ebe0494bff638990e84f21da.example. written by NSD 4.1.14 on Tue Dec 27 13:08:42 2016
+; received update to serial 5 at 2016-12-27T13:08:41 from 203.180.146.51
+$ORIGIN 429e2e1756e63122d795ee1990437435ebe0494bff638990e84f21da.example.
+catalog	3600	IN	SOA	. . (
+		5 8400 3600 86400 3600 )
+	3600	IN	NS	invalid.
+$ORIGIN catalog.429e2e1756e63122d795ee1990437435ebe0494bff638990e84f21da.example.
+version	3600	IN	TXT	"1"
+masters 3600	IN	A	127.0.0.1
+masters 3600	IN	TXT	'tsig-name'
+masters 3600	IN	A	127.0.0.2
+masters 3600	IN	AAAA	2001:de3::1
+masters 3600	IN	AAAA	2001:de3::2
+label1.masters 3600	IN	AAAA	2001:de3::1
+label1.masters 3600	IN	A	127.0.1.1
+label1.masters 3600	IN	TXT	'tsig-name1'
+label2.masters 3600	IN	AAAA	2001:de3::2
+label2.masters 3600	IN	A	127.0.1.2
+label2.masters 3600	IN	TXT	'tsig-name2'
+label2.masters 3600	IN	AAAA	2001:de3::3
+label2.masters 3600	IN	A	127.0.1.3
+label2.masters 3600	IN	TXT	'tsig-name3'
+notifies 3600	IN	A	10.0.0.1
+notifies 3600	IN	TXT	'tsig-name'
+notifies 3600	IN	A	10.0.0.2
+notifies 3600	IN	AAAA	2001:de3:1::1
+notifies 3600	IN	AAAA	2001:de3:1::2
+label1.notifies 3600	IN	AAAA	2001:de3::1
+label1.notifies 3600	IN	A	10.0.1.1
+label1.notifies 3600	IN	TXT	'tsig-name1'
+label2.notifies 3600	IN	AAAA	2001:de3::2
+label2.notifies 3600	IN	A	10.0.1.2
+label2.notifies 3600	IN	TXT	'tsig-name2'
+label2.notifies 3600	IN	AAAA	2001:de3::3
+label2.notifies 3600	IN	A	10.0.1.3
+label2.notifies 3600	IN	TXT	'tsig-name3'
+allow-transfer 3600 IN  APL 1:10.0.1.0/24 2:2001:de3:0:1::/64
+allow-transfer 3600 IN  APL 1:10.0.2.0/24 2:2001:de3:0:2::/64
+allow-transfer 3600 IN  APL 1:10.0.3.0/24 2:2001:de3:0:3::/64
+label1.allow-transfer 3600 IN  APL 1:10.1.1.0/24 2:2001:de3:1:1::/64
+label1.allow-transfer 3600 IN  APL 1:10.1.2.0/24 2:2001:de3:1:2::/64
+label1.allow-transfer 3600 IN  APL 1:10.1.3.0/24 2:2001:de3:1:3::/64
+label2.allow-transfer 3600 IN  APL 1:10.2.1.0/24 2:2001:de3:2:1::/64
+label2.allow-transfer 3600 IN  APL 1:10.2.2.0/24 2:2001:de3:2:2::/64
+label2.allow-transfer 3600 IN  APL 1:10.2.3.0/24 2:2001:de3:2:3::/64
+label3.allow-transfer 3600 IN  APL 1:10.3.1.0/24 2:2001:de3:3:1::/64
+label3.allow-transfer 3600 IN  APL 1:10.3.2.0/24 2:2001:de3:3:2::/64
+label3.allow-transfer 3600 IN  APL 1:10.3.3.0/24 2:2001:de3:3:3::/64
+$ORIGIN zones.catalog.429e2e1756e63122d795ee1990437435ebe0494bff638990e84f21da.example.
+47ac1a4d93b61fffdb4762c18c9e7d1a6b046d33	3600	IN	PTR	example.org.
+$ORIGIN 47ac1a4d93b61fffdb4762c18c9e7d1a6b046d33.zones.catalog.429e2e1756e63122d795ee1990437435ebe0494bff638990e84f21da.example.
+masters 3600	IN	A	127.0.0.1
+masters 3600	IN	TXT	'tsig-name'
+masters 3600	IN	A	127.0.0.2
+masters 3600	IN	AAAA	2001:de3::1
+masters 3600	IN	AAAA	2001:de3::2
+label1.masters 3600	IN	AAAA	2001:de3::1
+label1.masters 3600	IN	A	127.0.1.1
+label1.masters 3600	IN	TXT	'tsig-name1'
+label2.masters 3600	IN	AAAA	2001:de3::2
+label2.masters 3600	IN	A	127.0.1.2
+label2.masters 3600	IN	TXT	'tsig-name2'
+label2.masters 3600	IN	AAAA	2001:de3::3
+label2.masters 3600	IN	A	127.0.1.3
+label2.masters 3600	IN	TXT	'tsig-name3'
+notifies 3600	IN	A	10.0.0.1
+notifies 3600	IN	TXT	'tsig-name'
+notifies 3600	IN	A	10.0.0.2
+notifies 3600	IN	AAAA	2001:de3:1::1
+notifies 3600	IN	AAAA	2001:de3:1::2
+label1.notifies 3600	IN	AAAA	2001:de3::1
+label1.notifies 3600	IN	A	10.0.1.1
+label1.notifies 3600	IN	TXT	'tsig-name1'
+label2.notifies 3600	IN	AAAA	2001:de3::2
+label2.notifies 3600	IN	A	10.0.1.2
+label2.notifies 3600	IN	TXT	'tsig-name2'
+label2.notifies 3600	IN	AAAA	2001:de3::3
+label2.notifies 3600	IN	A	10.0.1.3
+label2.notifies 3600	IN	TXT	'tsig-name3'
+allow-transfer 3600 IN  APL 1:10.100.1.0/24 2:2001:de3:100:1::/64
+allow-transfer 3600 IN  APL 1:10.100.2.0/24 2:2001:de3:100:2::/64
+allow-transfer 3600 IN  APL 1:10.100.3.0/24 2:2001:de3:100:3::/64
+label1.allow-transfer 3600 IN  APL 1:10.101.1.0/24 2:2001:de3:101:1::/64
+label1.allow-transfer 3600 IN  APL 1:10.101.2.0/24 2:2001:de3:101:2::/64
+label1.allow-transfer 3600 IN  APL 1:10.101.3.0/24 2:2001:de3:101:3::/64
+label2.allow-transfer 3600 IN  APL 1:10.102.1.0/24 2:2001:de3:102:1::/64
+label2.allow-transfer 3600 IN  APL 1:10.102.2.0/24 2:2001:de3:102:2::/64
+label2.allow-transfer 3600 IN  APL 1:10.102.3.0/24 2:2001:de3:102:3::/64
+label3.allow-transfer 3600 IN  APL 1:10.103.1.0/24 2:2001:de3:103:1::/64
+label3.allow-transfer 3600 IN  APL 1:10.103.2.0/24 2:2001:de3:103:2::/64
+label3.allow-transfer 3600 IN  APL 1:10.103.3.0/24 2:2001:de3:103:3::/64

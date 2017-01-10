@@ -1,0 +1,26 @@
+#
+# Configuration of catz
+#
+
+
+#
+# for make from zonefile
+#
+Config("catlog.example.jp") do
+	software "nsd"
+	outputdir "."
+	type file
+	zonename "catlog.example.jp"
+	zonefile "/etc/nsd/zones/catlog.example.jp.zone"
+end
+
+#
+# for make from axfr
+#
+Config("catlog2.example.jp") do
+	software "knot"
+	outputdir '.'
+	type axfr
+	zonename "catlog2.example.jp"
+	server "ns.example.jp"
+end
