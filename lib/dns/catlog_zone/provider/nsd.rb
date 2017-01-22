@@ -32,6 +32,8 @@ module Dns
           zones_config(catlog_zone)
         end
 
+        private
+        
         def global_config(catlog_zone)
           output "pattern:\n"
           output "\tname: \"CatlogZone\"\n"
@@ -84,6 +86,7 @@ module Dns
             output "zones:\n"
             output "\tinclude-pattern: \"CatlogZone\"\n"
             output "\tname: \"#{zone.zonename}\"\n"
+            output "\tzonefile: \"#{zonepath(zone)}\"\n"
             zone.masters.each_pair do |label, master|
               output output_master(master, "#{label}.masters")
             end

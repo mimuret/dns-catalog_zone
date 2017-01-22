@@ -24,6 +24,7 @@ module Dns
   module CatlogZone
     module Source
       class File < Base
+        
         def get
           reader = Dnsruby::ZoneReader.new(@setting.zonename)
           reader.process_file(@setting.zonefile)

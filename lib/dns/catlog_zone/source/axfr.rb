@@ -29,7 +29,7 @@ module Dns
           zt.server = setting.server
           zt.port = setting.port
           zt.tsig = setting.tsig if setting.tsig
-          zt.transfer(setting.tsig)
+          zt.transfer(setting.name)
         end
 
         def validate

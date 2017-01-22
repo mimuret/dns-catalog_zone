@@ -25,7 +25,7 @@ module Dns
     # Zone class
     class Zone
       include Dns::CatlogZone::ZoneHelper
-      attr_reader :zonename, :master, :notify
+      attr_reader :zonename
       attr_reader :masters, :notifies, :allow_transfers
 
       def initialize(zonename)

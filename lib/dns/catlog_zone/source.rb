@@ -32,6 +32,8 @@ module Dns
           begin
             require "dns/catlog_zone/source/#{type}"
             source = Object.const_get(class_name).new(setting)
+          rescue LoadError
+            raise Dns::CatlogZone::ValidateError, "can't find #{class_name}"
           rescue NameError
             raise Dns::CatlogZone::ValidateError, "can't find #{class_name}"
           end

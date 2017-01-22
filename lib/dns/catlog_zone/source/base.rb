@@ -29,10 +29,20 @@ module Dns
           @setting = setting
           @rrsets = []
         end
-
+        # get rrsets
+        #
+        # === Returns
+        # rrsets<Array[Dnsruby::RR]>
         def get
+          []
         end
 
+        # get rrsets
+        #
+        # === Raise
+        # SourceValidateError>
+        # === Returns
+        # true<TrueClass>
         def validate
           begin
             Dnsruby::Name.create(@setting.zonename)

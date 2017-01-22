@@ -28,7 +28,8 @@ module Dns
       def initialize(name)
         @attributes = { 'name' => name, 'software' => 'nsd',
                         'source' => 'file', 'output' => 'stdout',
-                        'zonename' => 'catlog.example' }
+                        'zonename' => 'catlog.example', 'zonepath' => '%s',
+                        'output_path' => 'catlog.conf' }
       end
 
       def method_missing(method_name, *params)

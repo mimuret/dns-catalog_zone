@@ -121,6 +121,20 @@ module Dns
                         '::1',
                         'add APL ::1'
       end
+
+      def test_convert_path
+        domain_name = Dnsruby::Name.create('example.jp')
+
+        [
+          ['%S(1)/%S(2)/%s.zone', 'e/x/example.jp.zone'],
+          ['%L(1)/%L(2)/%s.zone', 'jp/example/example.jp.zone'],
+          ['%H(1)/%H(2)/%s.zone', 'e/b/example.jp.zone'],
+          ['zones/%h.zone', 'zones/eb7b38678a581b9e32078e8b009d0c5c789bce7a.zone']
+        ].each do |testv|
+          path = Dns::CatlogZone.convert_path(testv[0], domain_name)
+          assert_equal path, testv[1]
+        end
+      end
     end
   end
 end

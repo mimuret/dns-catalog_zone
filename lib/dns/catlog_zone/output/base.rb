@@ -24,6 +24,7 @@ module Dns
   module CatlogZone
     module Output
       class Base
+        # @return [Array<Gem::Dependency>] Array of supported Chef versions
         attr_reader :rrsets
         def initialize(setting)
           @setting = setting

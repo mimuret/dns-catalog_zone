@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'ipaddr'
 require 'dns/catlog_zone/provider/base'
 
 module Dns
@@ -65,7 +64,7 @@ module Dns
           def print
             output_r "    - id: #{@id}"
             output_r '      type: slave' unless @masters.empty?
-            output_r '      type: slave' unless @notifies.empty?
+            output_r '      type: master' unless @notifies.empty?
             output_r "      master: [#{@masters.join(', ')}]" unless @masters.empty?
             output_r "      notify: [#{@notifies.join(', ')}]" unless @notifies.empty?
             output_r "      acl: [#{@acls.join(', ')}]" unless @acls.empty?
@@ -115,11 +114,14 @@ module Dns
         end
         # Dns::CatlogZone::Provider::Knot::Zone
         class Zone < Template
-          attr_accessor :domain, :template
+          attr_accessor :domain, :template, :storage, :file
           def print
-            output_r "    - domain: #{@domain}"
+            output_r "    - domain: #{@domain.to_s + '.'}"
             output_r '      type: slave' unless @masters.empty?
-            output_r '      type: slave' unless @notifies.empty?
+            output_r '      type: master' unless @notifies.empty?
+            output_r '      type: master' unless @notifies.empty?
+            output_r "      storage: #{storage}"
+            output_r "      file: #{file}"
             output_r "      master: [#{@masters.join(', ')}]" unless @masters.empty?
             output_r "      notify: [#{@notifies.join(', ')}]" unless @notifies.empty?
             output_r "      acl: [#{@acls.join(', ')}]" unless @acls.empty?
@@ -253,7 +255,13 @@ module Dns
 
         def zones_config(catlog_zone)
           catlog_zone.zones.each_pair do |_hash, zone|
-            kzone = Zone.new(domain: zone.zonename.to_s + '.')
+            zone_path = zonepath(zone)
+            storage = ::File.dirname(zone_path)
+            file = ::File.basename(zone_path)
+
+            kzone = Zone.new(domain: zone.zonename,
+                             storage: storage,
+                             file: file)
 
             add_zone(kzone)
             zone.masters.each_pair do |label, master|

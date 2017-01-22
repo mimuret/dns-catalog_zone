@@ -28,12 +28,15 @@ module Dns
           @setting = setting
           @output = ''
         end
+
         def write
           @output
         end
+
         def output(msg)
           @output += msg if msg
         end
+
         def output_r(msg = nil)
           @output += "#{msg}\n" if msg
         end
@@ -50,8 +53,12 @@ module Dns
           true
         end
 
-        def validate()
+        def validate
           true
+        end
+
+        def zonepath(zone)
+          CatlogZone.convert_path(@setting['zonepath'], zone.zonename)
         end
       end
     end

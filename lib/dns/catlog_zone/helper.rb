@@ -21,6 +21,7 @@
 # THE SOFTWARE.
 
 require 'camelizable'
+require 'digest/sha1'
 
 # add camelizable
 class String
@@ -33,6 +34,27 @@ module Dns
     class << self
       def root_path
         File.expand_path('../../../../', __FILE__)
+      end
+
+      # %s zone name
+      # %h zone hash
+      # %S(1) first character %S(2) second character %S(3) third character
+      # %L(1) top label %L(2) second label
+      # %H(1) zone name hash 1 character
+      # %H(2) zone name hash 2 character
+      def convert_path(format, zonename)
+        mhash = Digest::SHA1.hexdigest(zonename.canonical)
+        path = format.clone
+        path.gsub!(/%S\(1\)/, zonename.to_s[0])
+        path.gsub!(/%S\(2\)/, zonename.to_s[1])
+        path.gsub!(/%S\(3\)/, zonename.to_s[2])
+        path.gsub!(/%L\(1\)/, zonename.labels[zonename.labels.size - 1].to_s)
+        path.gsub!(/%L\(2\)/, zonename.labels[zonename.labels.size - 2].to_s)
+        path.gsub!(/%H\(1\)/, mhash[0])
+        path.gsub!(/%H\(2\)/, mhash[1])
+        path.gsub!(/%s/, zonename.to_s)
+        path.gsub!(/%h/, mhash)
+        path
       end
     end
     def host_rr?(rr)

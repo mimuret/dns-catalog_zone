@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'ipaddr'
 require 'dns/catlog_zone/provider/base'
 
 module Dns
@@ -111,6 +110,7 @@ module Dns
 
             output_r '<zone>'
             output_r "\tdomain\t#{zone.zonename}"
+            output_r "\tfile\t#{zonepath(zone)}"
             # for master
             if !masters.empty?
               output_r "\ttype\tslave"
