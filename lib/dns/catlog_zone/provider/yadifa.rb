@@ -34,6 +34,8 @@ module Dns
           @acls = []
           @remotes = []
           @zones = []
+          @masters = []
+          @notifies = []
         end
 
         def make(catlog_zone)
@@ -42,15 +44,13 @@ module Dns
         end
 
         def global_config(catlog_zone)
-          masters = []
-          notifies = []
           allow_transfers = []
 
           catlog_zone.masters.each_pair do |_label, master|
-            add_master(master, masters)
+            add_master(master, @masters)
           end
           catlog_zone.notifies.each_pair do |_label, notify|
-            add_notify(notify, notifies)
+            add_notify(notify, @notifies)
           end
           catlog_zone.allow_transfers.each_pair do |_label, prefixes|
             add_prefixes(prefixes, allow_transfers)
@@ -58,15 +58,8 @@ module Dns
 
           output_r '<main>'
           # for master
-          unless masters.empty?
-            output_r "\tallow-notify\t#{masters.join(';')}"
-            output_r "\tmasters\t#{masters.join(',')}"
-          end
-
-          # for notify
-          unless notifies.empty?
-            output_r "\talso-notify\t#{notifies.join(',')}"
-            allow_transfers = notifies
+          unless @masters.empty?
+            output_r "\tallow-notify\t#{@masters.join(';')}"
           end
 
           # for allow-transfer
@@ -95,8 +88,8 @@ module Dns
 
         def zones_config(catlog_zone)
           catlog_zone.zones.each_pair do |_hash, zone|
-            masters = []
-            notifies = []
+            masters = @masters.clone
+            notifies = @notifies.clone
             allow_transfers = []
 
             zone.masters.each_pair do |_label, master|
