@@ -29,7 +29,7 @@ module Dns
         @attributes = { 'name' => name, 'software' => 'nsd',
                         'source' => 'file', 'output' => 'stdout',
                         'zonename' => 'catlog.example', 'zonepath' => '%s',
-                        'output_path' => 'catlog.conf' }
+                        'output_path' => 'catlog.conf', 'port' => 53 }
       end
 
       def method_missing(method_name, *params)
@@ -44,9 +44,9 @@ module Dns
       end
 
       def validate
-          Source.create(self).validate
-          Provider.create(self).validate
-          Output.create(self).validate
+        Source.create(self).validate
+        Provider.create(self).validate
+        Output.create(self).validate
       end
     end
 

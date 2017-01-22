@@ -58,7 +58,7 @@ module Dns
         end
 
         def zonepath(zone)
-          CatlogZone.convert_path(@setting['zonepath'], zone.zonename)
+          Dns::CatlogZone.convert_path(@setting.zonepath, zone.zonename)
         end
       end
     end
