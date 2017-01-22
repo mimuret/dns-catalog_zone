@@ -39,7 +39,6 @@ module Dns
         def make(catlog_zone)
           global_config(catlog_zone)
           zones_config(catlog_zone)
-          puts @output
         end
 
         def global_config(catlog_zone)
