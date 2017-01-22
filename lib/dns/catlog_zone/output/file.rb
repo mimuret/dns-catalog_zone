@@ -23,7 +23,6 @@
 module Dns
   module CatlogZone
     module Output
-      class CantOutput < RuntimeError; end
       class File < Base
         def initialize(setting)
           @setting = setting
@@ -41,12 +40,9 @@ module Dns
           realpath = ::File.expand_path(@setting.output_path)
           realdirpath = ::File.dirname(realpath)
 
-          puts "#{realpath}:#{::File.writable?(realpath)}"
-          puts "#{realdirpath}:#{::File.world_writable?(realdirpath)}"
-
-          raise Dns::CatlogZone::Output::CantOutput,
+          raise Dns::CatlogZone::CantOutput,
                 'output_path is not writable' unless ::File.writable?(realpath) || \
-                                                     ::File.world_writable?(realdirpath)
+                                                     ::File.writable?(realdirpath)
           true
         end
       end

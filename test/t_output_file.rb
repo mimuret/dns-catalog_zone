@@ -16,7 +16,7 @@ module Dns
           file.validate
         end
         setting.output_path = 'hogehogehoge/hogehogehoge/hogehogehoge'
-        assert_raises Output::CantOutput, 'not writable output_path ' do
+        assert_raises CantOutput, 'not writable output_path ' do
           file.validate
         end
         setting.output_path = 'test.conf'

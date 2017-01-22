@@ -26,8 +26,14 @@ module Dns
       class File < Base
         
         def get
-          reader = Dnsruby::ZoneReader.new(@setting.zonename)
-          reader.process_file(@setting.zonefile)
+          rrsets = []
+          begin
+            reader = Dnsruby::ZoneReader.new(@setting.zonename)
+            rrsets = reader.process_file(@setting.zonefile)
+          rescue
+            raise ZonePraseError
+          end
+          rrsets
         end
 
         def validate

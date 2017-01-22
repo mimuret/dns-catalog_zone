@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+require 'timeout'
+
 module Dns
   module CatlogZone
     module Source
@@ -30,7 +32,15 @@ module Dns
           zt.port = @setting.port
           zt.tsig = @setting.tsig if @setting.tsig
           zt.src_address = @setting.src_address if @setting.src_address
-          zt.transfer(@setting.zonename)
+          rrsets = []
+          timeout(@setting.timeout, Dns::CatlogZone::AxfrTimeout) do
+            begin
+              rrsets = zt.transfer(@setting.zonename)
+            rescue
+              raise Dns::CatlogZone::AxfrError
+            end
+          end
+          rrsets
         end
 
         def validate

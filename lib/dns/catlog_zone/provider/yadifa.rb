@@ -29,6 +29,7 @@ module Dns
         def initialize(setting)
           @setting = setting
           @output = ''
+          @type = 'master'
           @templates = []
           @acls = []
           @remotes = []
@@ -78,6 +79,7 @@ module Dns
 
         def add_master(master, masters)
           return if master.addresses.empty?
+          @type = 'slave'
           masters.push(master.addresses)
         end
 
@@ -109,16 +111,14 @@ module Dns
             end
 
             output_r '<zone>'
+            output_r "\ttype\t#{@type}"
             output_r "\tdomain\t#{zone.zonename}"
             output_r "\tfile\t#{zonepath(zone)}"
             # for master
             if !masters.empty?
-              output_r "\ttype\tslave"
               output_r "\tallow-notify\t#{masters.join(';')}"
               output_r "\tmasters\t#{masters.join(',')}"
               output_r "\ttrue-multimaster\tyes" if masters.count > 1
-            else
-              output_r "\ttype\tmaster"
             end
 
             # for notify

@@ -30,7 +30,7 @@ module Dns
           @setting = setting
         end
 
-        def output
+        def output(str)
         end
 
         def validate

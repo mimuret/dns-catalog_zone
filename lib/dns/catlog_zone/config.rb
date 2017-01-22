@@ -29,7 +29,8 @@ module Dns
         @attributes = { 'name' => name, 'software' => 'nsd',
                         'source' => 'file', 'output' => 'stdout',
                         'zonename' => 'catlog.example', 'zonepath' => '%s',
-                        'output_path' => 'catlog.conf', 'port' => 53 }
+                        'output_path' => 'catlog.conf', 'port' => 53,
+                        'timeout' => 30 }
       end
 
       def method_missing(method_name, *params)
