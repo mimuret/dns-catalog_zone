@@ -24,7 +24,7 @@ module Dns
   module CatlogZone
     module Source
       class Axfr < Base
-        def get(setting)
+        def get
           zt = Dnsruby::ZoneTransfer.new
           zt.server = setting.server
           zt.port = setting.port
