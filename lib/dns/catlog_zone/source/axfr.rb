@@ -31,6 +31,13 @@ module Dns
           zt.tsig = setting.tsig if setting.tsig
           zt.transfer(setting.name)
         end
+        def get
+          zt = Dnsruby::ZoneTransfer.new
+          zt.server = @setting.server
+          zt.port = @setting.port
+          zt.tsig = @setting.tsig if @setting.tsig
+          zt.transfer(@setting.zonename)
+        end
 
         def validate
           raise SourceValidateError,
