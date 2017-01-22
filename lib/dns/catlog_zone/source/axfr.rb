@@ -33,7 +33,7 @@ module Dns
           zt.tsig = @setting.tsig if @setting.tsig
           zt.src_address = @setting.src_address if @setting.src_address
           rrsets = []
-          timeout(@setting.timeout, Dns::CatlogZone::AxfrTimeout) do
+          timeout(@setting.timeout.to_i, Dns::CatlogZone::TimeoutError) do
             begin
               rrsets = zt.transfer(@setting.zonename)
             rescue

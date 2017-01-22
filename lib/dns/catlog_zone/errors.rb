@@ -26,6 +26,7 @@ module Dns
     class ValidateError < RuntimeError; end
     class CantOutput < RuntimeError; end
     class AxfrError < RuntimeError; end
+    class TimeoutError < RuntimeError; end
     class ZonePraseError < RuntimeError; end
   end
 end
