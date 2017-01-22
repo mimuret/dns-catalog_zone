@@ -29,7 +29,7 @@ module Dns
           zt.server = @setting.server
           zt.port = @setting.port
           zt.tsig = @setting.tsig if @setting.tsig
-          zt.source_address = @setting.source_address if @setting.source_address
+          zt.src_address = @setting.src_address if @setting.src_address
           zt.transfer(@setting.zonename)
         end
 
