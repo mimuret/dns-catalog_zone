@@ -131,7 +131,7 @@ module Dns
             unless allow_transfers.empty?
               output_r "\tallow-transfer\t#{allow_transfers.join(';')}"
             end
-            output_r '</main>'
+            output_r '</zone>'
           end
         end
       end
