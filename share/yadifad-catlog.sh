@@ -8,6 +8,10 @@ YADIFA_CONF_DIR='/usr/local/etc'
 PID_FILE=/var/run/yadifad/yadifa.pid
 CONF=$YADIFA_CONF_DIR/catlog-zone.conf
 
+if [ -e /etc/sysconfig/dns-catlog_zone ] ; then
+ . /etc/sysconfig/dns-catlog_zone
+fi
+
 # write zonefile
 if [ -e "$PID_FILE" ] ; then
   kill -USR1 `cat $PID_FILE`
