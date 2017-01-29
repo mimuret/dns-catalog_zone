@@ -55,8 +55,8 @@ module Dns
             ipa = IPAddr.new(addr)
             plen = ipa.ipv4? ? 32 : 128
             tsig = master.tsig || 'NOKEY'
-            request_xfr << "\trequest-xfr: #{addr} port #{master.port} #{tsig}\n"
-            allow_notify << "\tallow-notify: #{addr}/#{plen} port #{master.port} #{tsig}\n"
+            request_xfr << "\trequest-xfr: #{addr}@#{master.port} #{tsig}\n"
+            allow_notify << "\tallow-notify: #{addr}/#{plen}@#{master.port} #{tsig}\n"
           end
           output = request_xfr.join + allow_notify.join
           return "\t# #{label}\n#{output}" unless output.empty?
@@ -69,8 +69,8 @@ module Dns
             ipa = IPAddr.new(addr)
             plen = ipa.ipv4? ? 32 : 128
             tsig = notify.tsig || 'NOKEY'
-            notifies << "\tnotify: #{addr} port #{notify.port} #{tsig}\n"
-            provide_xfr << "\tprovide-xfr: #{addr}/#{plen} port #{notify.port} #{tsig}\n"
+            notifies << "\tnotify: #{addr}@#{notify.port} #{tsig}\n"
+            provide_xfr << "\tprovide-xfr: #{addr}/#{plen}@#{notify.port} #{tsig}\n"
           end
           output = notifies.join + provide_xfr.join
           return "\t# #{label}\n#{output}" unless output.empty?
