@@ -44,18 +44,18 @@ module Dns
       end
       desc 'checkconf [setting]', 'check config'
       def checkconf(name = nil)
-        read_config(name)
+        read_config
         @config.settings.each do |setting|
           next unless name == setting.name || name.nil?
-          setting.validate(name)
+          setting.validate
         end
       end
       desc 'make [setting]', 'make config file'
       def make(name = nil)
-        read_config(name)
+        read_config
         @config.settings.each do |setting|
           next unless name == setting.name || name.nil?
-          setting.validate(name)
+          setting.validate
           catlog_zone = make_CatlogZone(setting)
           provider = make_config(setting, catlog_zone)
           output(setting, provider)
@@ -64,7 +64,7 @@ module Dns
 
       private
 
-      def read_config(name)
+      def read_config
         @config = Dns::CatlogZone::Config.read
       end
 
