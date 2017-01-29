@@ -82,7 +82,7 @@ module Dns
 
         def zones_config(catlog_zone)
           catlog_zone.zones.each_pair do |_hash, zone|
-            output "zones:\n"
+            output "zone:\n"
             output "\tinclude-pattern: \"CatlogZone\"\n"
             output "\tname: \"#{zone.zonename}\"\n"
             output "\tzonefile: \"#{zonepath(zone)}\"\n"
