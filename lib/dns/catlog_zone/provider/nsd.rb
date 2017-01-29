@@ -37,7 +37,6 @@ module Dns
         def global_config(catlog_zone)
           output "pattern:\n"
           output "\tname: \"CatlogZone\"\n"
-          output "\tinclude-pattern: \"CatlogZone-default\"\n"
           catlog_zone.masters.each_pair do |label, master|
             output output_master(master, "#{label}.masters")
           end
