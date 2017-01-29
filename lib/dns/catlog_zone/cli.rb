@@ -42,11 +42,20 @@ module Dns
                "#{setting.software}\t\t#{setting.zonename}\n"
         end
       end
-      desc 'make [setting]', 'make config file'
-      def make(name = nil)
-        read_config
+      desc 'checkconf [setting]', 'check config'
+      def checkconf(name = nil)
+        read_config(name)
         @config.settings.each do |setting|
           next unless name == setting.name || name.nil?
+          setting.validate(name)
+        end
+      end
+      desc 'make [setting]', 'make config file'
+      def make(name = nil)
+        read_config(name)
+        @config.settings.each do |setting|
+          next unless name == setting.name || name.nil?
+          setting.validate(name)
           catlog_zone = make_CatlogZone(setting)
           provider = make_config(setting, catlog_zone)
           output(setting, provider)
@@ -55,9 +64,8 @@ module Dns
 
       private
 
-      def read_config
+      def read_config(name)
         @config = Dns::CatlogZone::Config.read
-        @config.validate
       end
 
       def make_CatlogZone(setting)
