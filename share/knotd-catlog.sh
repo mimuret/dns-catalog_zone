@@ -3,14 +3,10 @@
 # add yadifad.conf
 # >> include catlog.conf
 #
-DNS_CATLOG_ZONE_DIR='/usr/local/dns-catlog_zone'
-KNOT_CONF_DIR='/usr/local/etc/knot'
-CONF=$DNS_CATLOG_ZONE_DIR/catlog-zone.conf
+DNS_CATLOG_ZONE_DIR='/var/service/ans/dns-catlog_zone'
+KNOT_CONF_DIR='/var/service/ans/conf/knot'
+CONF=$KNOT_CONF_DIR/catlog-zone.conf
 KNOTC='/var/service/ans/knot/sbin/knotc'
-
-if [ -e /etc/sysconfig/dns-catlog_zone ] ; then
- . /etc/sysconfig/dns-catlog_zone
-fi
 
 # zone flush to file
 $KNOTC zone-flush

@@ -63,8 +63,6 @@ module Dns
 
           def print
             output_r "    - id: #{@id}"
-            output_r '      type: slave' unless @masters.empty?
-            output_r '      type: master' unless @notifies.empty?
             output_r "      master: [#{@masters.join(', ')}]" unless @masters.empty?
             output_r "      notify: [#{@notifies.join(', ')}]" unless @notifies.empty?
             output_r "      acl: [#{@acls.join(', ')}]" unless @acls.empty?
@@ -220,8 +218,8 @@ module Dns
             remote.add_address(addr)
             acl.add_address(addr)
           end
-          template.add_acl(mkl('master', label))
-          template.add_master(mkl('notify', label))
+          template.add_acl(mkl('notify', label))
+          template.add_master(mkl('master', label))
           add_acl(acl)
           add_remote(remote)
         end
