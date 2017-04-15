@@ -21,8 +21,6 @@
 # THE SOFTWARE.
 
 require 'digest/sha1'
-require 'dns/catlog_zone'
-require 'dnsruby'
 
 module Dns
   module CatlogZone
@@ -70,7 +68,6 @@ module Dns
         when '1'
           parse_v1
         else
-          require 'pp'
           raise ValidateError, "#{@version} is unknown Catalog zone schema version"
         end
       end

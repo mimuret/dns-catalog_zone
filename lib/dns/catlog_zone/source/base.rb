@@ -29,6 +29,7 @@ module Dns
           @setting = setting
           @rrsets = []
         end
+
         # get rrsets
         #
         # === Returns

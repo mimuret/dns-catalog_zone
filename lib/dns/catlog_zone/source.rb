@@ -21,6 +21,7 @@
 # THE SOFTWARE.
 
 require 'dns/catlog_zone/source/base'
+
 module Dns
   module CatlogZone
     # source module

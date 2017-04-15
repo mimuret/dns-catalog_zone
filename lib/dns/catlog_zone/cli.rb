@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'dns/catlog_zone'
 require 'thor'
 
 # The Cli class is used to catz cli application

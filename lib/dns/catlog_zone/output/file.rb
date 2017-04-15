@@ -29,9 +29,15 @@ module Dns
         end
 
         def output(str)
-          File.open(@setting.output_path, 'w') do |file|
-            file.print(str)
-          end
+          tmp_file = Tempfile.create('catlog_zone')
+          path = tmp_file.path
+          tmp_file.print(str)
+          tmp_file.close
+          FileUtils.mv(path, @setting.output_path)
+        rescue
+          raise "can't write #{@setting.output_path}"
+        ensure
+          File.unlink(path) if File.exist?(path)
         end
 
         def validate

@@ -21,7 +21,6 @@
 # THE SOFTWARE.
 
 require 'ipaddr'
-require 'dns/catlog_zone/provider/base'
 
 module Dns
   module CatlogZone
@@ -33,7 +32,7 @@ module Dns
         end
 
         private
-        
+
         def global_config(catlog_zone)
           output "pattern:\n"
           output "\tname: \"CatlogZone\"\n"
@@ -43,7 +42,7 @@ module Dns
           catlog_zone.notifies.each_pair do |label, notify|
             output output_notify(notify, "#{label}.notifies")
           end
-          catlog_zone.allow_transfers.each_pair do |label,prefixes|
+          catlog_zone.allow_transfers.each_pair do |_label, prefixes|
             output output_prefixes(prefixes)
           end
         end

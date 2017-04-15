@@ -21,6 +21,7 @@
 # THE SOFTWARE.
 
 require 'dns/catlog_zone/output/base'
+
 module Dns
   module CatlogZone
     # output module

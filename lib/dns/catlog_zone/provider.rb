@@ -21,6 +21,7 @@
 # THE SOFTWARE.
 
 require 'dns/catlog_zone/provider/base'
+
 module Dns
   module CatlogZone
     # Provider module

@@ -20,8 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'dns/catlog_zone/provider/base'
-
 module Dns
   module CatlogZone
     module Provider
@@ -244,7 +242,6 @@ module Dns
 
         def output_prefixes(prefixes, template, label)
           acl = Acl.new(id: mkl('acl', label), action: 'transfer')
-          require 'pp'
 
           prefixes.prefixes.each do |prefix|
             acl.add_address("#{prefix.address}/#{prefix.prefix_length}")

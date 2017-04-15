@@ -24,7 +24,6 @@ module Dns
   module CatlogZone
     module Source
       class File < Base
-        
         def get
           rrsets = []
           begin

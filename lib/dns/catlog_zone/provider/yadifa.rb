@@ -20,8 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'dns/catlog_zone/provider/base'
-
 module Dns
   module CatlogZone
     module Provider
@@ -98,7 +96,7 @@ module Dns
             zone.notifies.each_pair do |_label, notify|
               add_notify(notify, notifies)
             end
-            zone.allow_transfers.each_pair do |_label,prefixes|
+            zone.allow_transfers.each_pair do |_label, prefixes|
               add_prefixes(prefixes, allow_transfers)
             end
 
@@ -107,7 +105,7 @@ module Dns
             output_r "\tdomain\t#{zone.zonename}"
             output_r "\tfile\t#{zonepath(zone)}"
             # for master
-            if !masters.empty?
+            unless masters.empty?
               output_r "\tallow-notify\t#{masters.join(';')}"
               output_r "\tmasters\t#{masters.join(',')}"
               output_r "\ttrue-multimaster\tyes" if masters.count > 1

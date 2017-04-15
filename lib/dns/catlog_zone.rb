@@ -23,19 +23,19 @@
 require 'dns/catlog_zone/version'
 require 'dns/catlog_zone/helper'
 require 'dns/catlog_zone/errors'
+require 'dns/catlog_zone/output'
 require 'dns/catlog_zone/provider'
 require 'dns/catlog_zone/source'
-require 'dns/catlog_zone/output'
 require 'dns/catlog_zone/config'
 require 'dns/catlog_zone/zone'
 require 'dns/catlog_zone/master'
 require 'dns/catlog_zone/prefixes'
 require 'dns/catlog_zone/catlog_zone'
 require 'dns/catlog_zone/cli'
+require 'dnsruby'
 
 module Dns
-  # Dns::CatlogZone 
+  # Dns::CatlogZone
   module CatlogZone
-
   end
 end
