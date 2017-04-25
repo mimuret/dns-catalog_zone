@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.cert_chain    = ['certs/mimuret.pem']
   spec.signing_key   = File.expand_path('~/.ssh/gem-private_key.pem') if $PROGRAM_NAME.end_with?('gem')
-  spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
+  spec.metadata['allowed_push_host'] = 'https://rubygems.org'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = 'bin'
