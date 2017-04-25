@@ -42,58 +42,58 @@ end
 
 config output to stdout
 ```bash
-$ catz make
+$ bundle exec catz make
 ```
 
 
 ## Settings attribute
-| name | value | default |
+| name | value | default | description |
 |:-----------|------------:|:------------:|
-|zonename|string(domain name) default catlog.example||
-|software|string default nsd||
-|source|string default file||
-|output|string default stdout||
+|zonename|string(domain name)|catlog.example| catlog zone domain name |
+|software|string|nsd|software module name|
+|source|string|file|source module name|
+|output|string|stdout|output module name|
 
-### source attributes
-#### source file
+### source modules
+#### file module
 | name | value | required |
 |:-----------|------------:|:------------:|
-|source|file||
+|source|file|true|
 |zonefile|path|true|
 
-#### source axfr
-| name | value | required |
+#### axfr module
+| name | value | default |required |
 |:-----------|------------:|:------------:|
-|source|axfr||
-|server|ip or hostname|true|
-|port|int default 53|false|
-|tsig|string|false|
-|src_address|ip|false|
-|timeout|int default 30|false|
+|source|axfr||true|
+|server|ip or hostname||true|
+|port|int|53|false|
+|tsig|string||false|
+|src_address|ip||false|
+|timeout|int|30|false|
 
-### software attributes
-#### software nsd
+### software modules
+#### nsd module
 | name | value | required |
 |:-----------|------------:|:------------:|
 |software|nsd||
 
-#### software knot
+#### knot module
 | name | value | required |
 |:-----------|------------:|:------------:|
 |software|knot||
 
-#### software yadifa
+#### yadifa module
 | name | value | required |
 |:-----------|------------:|:------------:|
 |software|yadifa||
 
-### output attribute
-#### software stdout
+### output modules
+#### stdout module
 | name | value | required |
 |:-----------|------------:|:------------:|
 |output|stdout||
 
-#### software file
+#### file module
 | name | value | required |
 |:-----------|------------:|:------------:|
 |output|file||
