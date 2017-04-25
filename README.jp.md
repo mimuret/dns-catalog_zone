@@ -3,7 +3,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/mimuret/dns-catlog_zone/badge.svg?branch=master)](https://coveralls.io/github/mimuret/dns-catlog_zone?branch=master)
 
 PoC of Catlog zone (draft-muks-dnsop-dns-catalog-zones)
- 
+[README in English](https://github.com/mimuret/dns-catlog_zone/blob/master/README.md)  
+
 ## supported name server softwares
 * NSD4 (default)
 * Knot dns
@@ -48,7 +49,7 @@ $ bundle exec catz make
 
 ## Settings attribute
 | name | value | default | description |
-|:-----------|------------:|:------------:|
+|:-----------|------------|:------------|:------------|
 |zonename|string(domain name)|catlog.example| catlog zone domain name |
 |software|string|nsd|software module name|
 |source|string|file|source module name|
@@ -57,13 +58,13 @@ $ bundle exec catz make
 ### source modules
 #### file module
 | name | value | required |
-|:-----------|------------:|:------------:|
+|:-----------|:------------|:------------|
 |source|file|true|
 |zonefile|path|true|
 
 #### axfr module
 | name | value | default |required |
-|:-----------|------------:|:------------:|
+|:-----------|:------------|:------------|:------------|
 |source|axfr||true|
 |server|ip or hostname||true|
 |port|int|53|false|
@@ -74,28 +75,28 @@ $ bundle exec catz make
 ### software modules
 #### nsd module
 | name | value | required |
-|:-----------|------------:|:------------:|
+|:-----------|:------------|:------------|
 |software|nsd||
 
 #### knot module
 | name | value | required |
-|:-----------|------------:|:------------:|
+|:-----------|:------------|:------------|
 |software|knot||
 
 #### yadifa module
 | name | value | required |
-|:-----------|------------:|:------------:|
+|:-----------|:------------|:------------|
 |software|yadifa||
 
 ### output modules
 #### stdout module
 | name | value | required |
-|:-----------|------------:|:------------:|
+|:-----------|:------------|:------------|
 |output|stdout||
 
 #### file module
 | name | value | required |
-|:-----------|------------:|:------------:|
+|:-----------|:------------|:------------|
 |output|file||
 |output_path|path|true|
 
