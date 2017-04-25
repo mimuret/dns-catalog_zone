@@ -1,13 +1,13 @@
 language: ruby
 cache: bundler
 sudo: false
-
+dist: trusty
 script: "bundle exec rake test"
-
 rvm:
   - 2.1.10
   - 2.2.6
   - 2.3.3
   - 2.4.0
   - ruby-head
-  
+  - jruby 
+  - rubinius-3.75 
