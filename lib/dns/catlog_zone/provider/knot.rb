@@ -113,9 +113,6 @@ module Dns
           attr_accessor :domain, :template, :storage, :file
           def print
             output_r "    - domain: #{@domain.to_s + '.'}"
-            output_r '      type: slave' unless @masters.empty?
-            output_r '      type: master' unless @notifies.empty?
-            output_r '      type: master' unless @notifies.empty?
             output_r "      storage: #{storage}"
             output_r "      file: #{file}"
             output_r "      master: [#{@masters.join(', ')}]" unless @masters.empty?
