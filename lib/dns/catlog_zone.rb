@@ -31,7 +31,6 @@ require 'dns/catlog_zone/zone'
 require 'dns/catlog_zone/master'
 require 'dns/catlog_zone/prefixes'
 require 'dns/catlog_zone/catlog_zone'
-require 'dns/catlog_zone/cli'
 require 'dnsruby'
 
 module Dns

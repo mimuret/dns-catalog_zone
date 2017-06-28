@@ -27,11 +27,18 @@ module Dns
     module Provider
       class Nsd < Base
         def make(catlog_zone)
+          @output = ''
           global_config(catlog_zone)
           zones_config(catlog_zone)
         end
+        def reconfig
+          system("#{control} reconfig")
+        end
 
         private
+        def control
+          @setting['control'] || "nsd-control"
+        end
 
         def global_config(catlog_zone)
           output "pattern:\n"

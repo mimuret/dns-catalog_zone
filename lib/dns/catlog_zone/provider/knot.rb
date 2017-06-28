@@ -129,14 +129,13 @@ module Dns
         end
         def initialize(setting)
           @setting = setting
+        end
+        def make(catlog_zone)
           @output = ''
           @templates = []
           @acls = []
           @remotes = []
           @zones = []
-        end
-
-        def make(catlog_zone)
           global_config(catlog_zone)
           zones_config(catlog_zone)
           make_output
@@ -161,8 +160,14 @@ module Dns
           end
         end
 
-        private
+        def reconfig
+          system("#{control} reload")
+        end
 
+        private
+        def control
+          @setting['control'] || "knotc"
+        end
         def add_template(template)
           @templates.push(template)
         end

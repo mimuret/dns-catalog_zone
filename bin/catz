@@ -24,19 +24,10 @@
 
 begin
   require 'dns/catlog_zone'
-  rc = Dns::CatlogZone::Cli.start
-  exit rc if rc.is_a? Integer
-  exit 0
+  require 'dns/catlog_zone/cli'
+
+  Dns::CatlogZone::Cli.start
 rescue Dns::CatlogZone::ConfigNotFound
   puts 'config file not found. please run [catz init]'
   exit 1
-rescue StandardError => e
-  require 'log4r'
-  logger = Log4r::Logger.new('catz')
-  logger.outputters = Log4r::Outputter.stdout
-
-  logger.error(e.inspect)
-  logger.error(e.message)
-  logger.error(e.backtrace.join("\n"))
-  exit 255
 end

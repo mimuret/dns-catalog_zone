@@ -26,6 +26,9 @@ module Dns
       class Yadifa < Base
         def initialize(setting)
           @setting = setting
+        end
+
+        def make(catlog_zone)
           @output = ''
           @type = 'master'
           @templates = []
@@ -34,11 +37,17 @@ module Dns
           @zones = []
           @masters = []
           @notifies = []
-        end
-
-        def make(catlog_zone)
           global_config(catlog_zone)
           zones_config(catlog_zone)
+        end
+
+        def reconfig
+          system("#{control} cfgreload")
+        end
+
+        private
+        def control
+          @setting['control'] || "yadifa"
         end
 
         def global_config(catlog_zone)
