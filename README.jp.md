@@ -34,8 +34,8 @@ CatlogZoneの中身
 setting("catlog.example.jp") do |s|
 	s.software="nsd"
 	s.source="file"
-	s.zonename "catlog.example.jp"
-	s.zonefile "/etc/nsd/catlog.example.jp.zone"
+	s.zonename="catlog.example.jp"
+	s.zonefile="/etc/nsd/catlog.example.jp.zone"
 end
 ````
 
