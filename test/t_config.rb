@@ -1,7 +1,7 @@
 require 'helper'
 
 module Dns
-  module CatlogZone
+  module CatalogZone
     class TestConfig < Minitest::Test
       def test_config_not_read
         assert_raises ConfigNotFound, 'can not read' do
@@ -16,7 +16,7 @@ module Dns
       end
 
       def test_config_read_success
-        config = Config.read('test/config/CatlogZone')
+        config = Config.read('test/config/CatalogZone')
         assert_instance_of Config, config, 'can read'
       end
     end

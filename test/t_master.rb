@@ -2,7 +2,7 @@ require 'helper'
 require 'dnsruby'
 
 module Dns
-  module CatlogZone
+  module CatalogZone
     class TestMaster < Minitest::Test
       def test_master
         master = Master.new

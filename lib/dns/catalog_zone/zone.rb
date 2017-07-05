@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,20 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+module Dns
+  module CatalogZone
+    # Zone class
+    class Zone
+      include Dns::CatalogZone::ZoneHelper
+      attr_reader :zonename
+      attr_reader :masters, :notifies, :allow_transfers
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+      def initialize(zonename)
+        @zonename = zonename
+        @masters = {}
+        @notifies = {}
+        @allow_transfers = {}
+      end
+    end
+  end
 end

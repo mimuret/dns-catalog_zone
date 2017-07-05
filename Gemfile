@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in dns-catlog_zone.gemspec
+# Specify your gem's dependencies in dns-catalog_zone.gemspec
 gemspec
 
 group :test do

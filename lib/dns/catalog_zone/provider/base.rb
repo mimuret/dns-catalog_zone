@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,47 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+module Dns
+  module CatalogZone
+    module Provider
+      class Base
+        def initialize(setting)
+          @setting = setting
+          @output = ''
+        end
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+        def write
+          @output
+        end
+
+        def output(msg)
+          @output += msg if msg
+        end
+
+        def output_r(msg = nil)
+          @output += "#{msg}\n" if msg
+        end
+
+        def make(_catalog_zone)
+          true
+        end
+
+        def reconfig
+          true
+        end
+
+        def reload
+          true
+        end
+
+        def validate
+          true
+        end
+
+        def zonepath(zone)
+          Dns::CatalogZone.convert_path(@setting.zonepath, zone.zonename)
+        end
+      end
+    end
+  end
 end

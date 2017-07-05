@@ -1,8 +1,8 @@
 require 'helper'
 
 module Dns
-  module CatlogZone
-    class TestCatlogZone < Minitest::Test
+  module CatalogZone
+    class TestCatalogZone < Minitest::Test
       def test_init
 
       end

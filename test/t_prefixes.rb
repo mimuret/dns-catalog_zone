@@ -2,7 +2,7 @@ require 'helper'
 require 'dnsruby'
 
 module Dns
-  module CatlogZone
+  module CatalogZone
     class TestPrefixes < Minitest::Test
       def test_prefixes
         prefixes = Prefixes.new

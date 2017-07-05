@@ -1,10 +1,10 @@
 require 'helper'
 require 'dnsruby'
 module Dns
-  module CatlogZone
+  module CatalogZone
     class TestHelper < Minitest::Test
-      include Dns::CatlogZone
-      include Dns::CatlogZone::ZoneHelper
+      include Dns::CatalogZone
+      include Dns::CatalogZone::ZoneHelper
       def setup
         @masters = {}
         @notifies = {}
@@ -131,7 +131,7 @@ module Dns
           ['%H(1)/%H(2)/%s.zone', 'e/b/example.jp.zone'],
           ['zones/%h.zone', 'zones/eb7b38678a581b9e32078e8b009d0c5c789bce7a.zone']
         ].each do |testv|
-          path = Dns::CatlogZone.convert_path(testv[0], domain_name)
+          path = Dns::CatalogZone.convert_path(testv[0], domain_name)
           assert_equal path, testv[1]
         end
       end

@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,23 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+module Dns
+  module CatalogZone
+    module Output
+      class Base
+        # @return [Array<Gem::Dependency>] Array of supported Chef versions
+        attr_reader :rrsets
+        def initialize(setting)
+          @setting = setting
+        end
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+        def output(str)
+        end
+
+        def validate
+          true
+        end
+      end
+    end
+  end
 end

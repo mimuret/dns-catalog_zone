@@ -8,6 +8,6 @@
 /spec/reports/
 /tmp/
 /vendor/
-/CatlogZone
+/CatalogZone
 *.gem
 .ruby-version

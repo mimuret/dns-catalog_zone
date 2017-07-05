@@ -1,14 +1,14 @@
 require 'helper'
 
 module Dns
-  module CatlogZone
+  module CatalogZone
     class TestOutputFile < Minitest::Test
       def test_source_file
         setting = Setting.new('example')
         setting.output = 'file'
         setting.output_path = nil
         file = Output.create(setting)
-        assert_instance_of Dns::CatlogZone::Output::File,
+        assert_instance_of Dns::CatalogZone::Output::File,
                            file,
                            'create output file'
 

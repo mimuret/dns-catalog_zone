@@ -1,9 +1,9 @@
-# Dns::CatlogZone
-[![Build Status](https://travis-ci.org/mimuret/dns-catlog_zone.svg?branch=master)](https://travis-ci.org/mimuret/dns-catlog_zone)
-[![Coverage Status](https://coveralls.io/repos/github/mimuret/dns-catlog_zone/badge.svg?branch=master)](https://coveralls.io/github/mimuret/dns-catlog_zone?branch=master)
+# Dns::CatalogZone
+[![Build Status](https://travis-ci.org/mimuret/dns-catalog_zone.svg?branch=master)](https://travis-ci.org/mimuret/dns-catalog_zone)
+[![Coverage Status](https://coveralls.io/repos/github/mimuret/dns-catalog_zone/badge.svg?branch=master)](https://coveralls.io/github/mimuret/dns-catalog_zone?branch=master)
 
-PoC of Catlog zone (draft-muks-dnsop-dns-catalog-zones)
-[README in English](https://github.com/mimuret/dns-catlog_zone/blob/master/README.md)  
+PoC of catalog zone (draft-muks-dnsop-dns-catalog-zones)
+[README in English](https://github.com/mimuret/dns-catalog_zone/blob/master/README.md)  
 
 ## supported name server softwares
 * NSD4 (default)
@@ -13,8 +13,8 @@ PoC of Catlog zone (draft-muks-dnsop-dns-catalog-zones)
 ## インストール方法
 
 ```bash
-$ git clone https://github.com/mimuret/dns-catlog_zone
-$ cd dns-catlog_zone
+$ git clone https://github.com/mimuret/dns-catalog_zone
+$ cd dns-catalog_zone
 $ bundle install --path=vendor/bundle
 ```
 
@@ -22,20 +22,20 @@ $ bundle install --path=vendor/bundle
 
 + configuration
 
-CatlogZoneファイルを生成します。
+CatalogZoneファイルを生成します。
 
 ```bash
 $ bundle exec catz init
-$ cat CatlogZone
+$ cat CatalogZone
 ```
 
-CatlogZoneの中身
+CatalogZoneの中身
 ```ruby
-setting("catlog.example.jp") do |s|
+setting("catalog.example.jp") do |s|
 	s.software="nsd"
 	s.source="file"
-	s.zonename="catlog.example.jp"
-	s.zonefile="/etc/nsd/catlog.example.jp.zone"
+	s.zonename="catalog.example.jp"
+	s.zonefile="/etc/nsd/catalog.example.jp.zone"
 end
 ````
 
@@ -50,7 +50,7 @@ $ bundle exec catz make
 ## Settings attribute
 | name | value | default | description |
 |:-----------|------------|:------------|:------------|
-|zonename|string(domain name)|catlog.example| catlog zone domain name |
+|zonename|string(domain name)|catalog.example| catalog zone domain name |
 |software|string|nsd|software module name|
 |source|string|file|source module name|
 |output|string|stdout|output module name|
@@ -102,11 +102,11 @@ $ bundle exec catz make
 
 ## Contributing
 
-バグレポートとプルリクエストはGitHub(https://github.com/mimuret/dns-catlog_zone)まで
+バグレポートとプルリクエストはGitHub(https://github.com/mimuret/dns-catalog_zone)まで
 
 対応するソフトウェアを増やしたい場合はプルリクエストしてマージするか、
 
-Dns::CatlogZone::Provider::(作りたい実装名)のクラスを作ってLOAD_PATHにおいてください。
+Dns::CatalogZone::Provider::(作りたい実装名)のクラスを作ってLOAD_PATHにおいてください。
 
 
 ## License

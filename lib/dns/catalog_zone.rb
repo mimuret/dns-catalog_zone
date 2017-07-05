@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+require 'dns/catalog_zone/version'
+require 'dns/catalog_zone/helper'
+require 'dns/catalog_zone/errors'
+require 'dns/catalog_zone/output'
+require 'dns/catalog_zone/provider'
+require 'dns/catalog_zone/source'
+require 'dns/catalog_zone/config'
+require 'dns/catalog_zone/zone'
+require 'dns/catalog_zone/master'
+require 'dns/catalog_zone/prefixes'
+require 'dns/catalog_zone/catalog_zone'
+require 'dnsruby'
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+module Dns
+  # Dns::CatalogZone
+  module CatalogZone
+  end
 end

@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+require 'timeout'
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+module Dns
+  module CatalogZone
+    module Source
+      class Axfr < Base
+        def get
+          zt = Dnsruby::ZoneTransfer.new
+          zt.server = @setting.server
+          zt.port = @setting.port
+          zt.tsig = @setting.tsig if @setting.tsig
+          zt.src_address = @setting.src_address if @setting.src_address
+          rrsets = []
+          timeout(@setting.timeout.to_i, Dns::CatalogZone::TimeoutError) do
+            begin
+              rrsets = zt.transfer(@setting.zonename)
+            rescue
+              raise Dns::CatalogZone::AxfrError
+            end
+          end
+          rrsets
+        end
+
+        def validate
+          raise SourceValidateError,
+                "[#{@setting.name}] require server param." unless @setting.server
+          super
+        end
+      end
+    end
+  end
 end

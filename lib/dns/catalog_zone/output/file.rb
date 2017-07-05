@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,38 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+module Dns
+  module CatalogZone
+    module Output
+      class File < Base
+        def initialize(setting)
+          @setting = setting
+        end
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+        def output(str)
+          tmp_file = Tempfile.create('catalog_zone')
+          path = tmp_file.path
+          tmp_file.print(str)
+          tmp_file.close
+          FileUtils.mv(path, @setting.output_path)
+        rescue
+          raise "can't write #{@setting.output_path}"
+        ensure
+          File.unlink(path) if File.exist?(path)
+        end
+
+        def validate
+          raise Dns::CatalogZone::ValidateError,
+                'source type file is output_path' unless @setting.output_path
+          realpath = ::File.expand_path(@setting.output_path)
+          realdirpath = ::File.dirname(realpath)
+
+          raise Dns::CatalogZone::CantOutput,
+                'output_path is not writable' unless ::File.writable?(realpath) || \
+                                                     ::File.writable?(realdirpath)
+          true
+        end
+      end
+    end
+  end
 end

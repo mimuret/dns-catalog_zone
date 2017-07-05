@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,26 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+module Dns
+  module CatalogZone
+    # Prefixes module
+    class Prefixes
+      include Dns::CatalogZone
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+      attr_reader :prefixes
+      def initialize(prefixes = [])
+        @prefixes = prefixes
+      end
+
+      def add_prefixes(prefixes)
+        prefixes.prefixes.each do |prefix|
+          @prefixes.push(prefix)
+        end
+        self
+      end
+      def parse_apl(rr)
+        add_prefixes(rr.prefixes) if apl_rr?(rr)
+      end
+    end
+  end
 end
