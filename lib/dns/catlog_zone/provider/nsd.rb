@@ -55,7 +55,7 @@ module Dns
             plen = ipa.ipv4? ? 32 : 128
             tsig = master.tsig || 'NOKEY'
             request_xfr << "\trequest-xfr: #{addr}@#{master.port} #{tsig}\n"
-            allow_notify << "\tallow-notify: #{addr}/#{plen}@#{master.port} #{tsig}\n"
+            allow_notify << "\tallow-notify: #{addr}/#{plen} #{tsig}\n"
           end
           output = request_xfr.join + allow_notify.join
           return "\t# #{label}\n#{output}" unless output.empty?
