@@ -1,7 +1,7 @@
 require 'helper'
 
 module Dns
-  module CatlogZone
+  module CatalogZone
     class TestZone < Minitest::Test
       def test_zone
         zone = Zone.new(Dnsruby::Name.create('example.jp'))

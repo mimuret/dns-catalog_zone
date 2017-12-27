@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,28 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+module Dns
+  module CatalogZone
+    # Master class
+    class Master
+      include Dns::CatalogZone
+      attr_accessor :tsig, :port
+      attr_reader :addresses
+      def initialize(addresses = [], port = 53, tsig = nil)
+        @addresses = addresses
+        @port = port
+        @tsig = tsig
+      end
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+      def add_address(address)
+        @addresses.push(address)
+        self
+      end
+
+      def parse_master(rr)
+        add_address(rr.rdata_to_string) if host_rr?(rr)
+        self.tsig = rr.strings.join('') if txt_rr?(rr)
+      end
+    end
+  end
 end

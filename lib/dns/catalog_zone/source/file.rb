@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+module Dns
+  module CatalogZone
+    module Source
+      class File < Base
+        def get
+          rrsets = []
+          begin
+            reader = Dnsruby::ZoneReader.new(@setting.zonename)
+            rrsets = reader.process_file(@setting.zonefile)
+          rescue
+            raise ZonePraseError
+          end
+          rrsets
+        end
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+        def validate
+          if @setting.zonefile.class != String ||
+             !::File.exist?(@setting.zonefile)
+            raise Dns::CatalogZone::ValidateError,
+                  "[#{@setting.name}] zonefile not found"
+          end
+          super
+        end
+      end
+    end
+  end
 end

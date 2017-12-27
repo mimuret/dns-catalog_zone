@@ -1,0 +1,24 @@
+#
+# Configuration of catz
+#
+
+
+#
+# for make from zonefile
+#
+setting("catalog.example.jp") do |s|
+	s.software="nsd"
+	s.source="file"
+	s.zonename="catalog.example.jp"
+	s.zonefile="/etc/nsd/catalog.example.jp.zone"
+end
+
+#
+# for make from axfr
+#
+#setting("catalog2.example.jp") do |s|
+#	s.software="knot"
+#	s.source="axfr"
+#	s.zonename="catalog2.example.jp"
+#	s.server="ns.example.jp"
+#end

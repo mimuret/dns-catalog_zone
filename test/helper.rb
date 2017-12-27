@@ -1,4 +1,4 @@
-require 'dns/catlog_zone'
+require 'dns/catalog_zone'
 require 'coveralls'
 require 'minitest/autorun'
 

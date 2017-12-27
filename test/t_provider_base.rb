@@ -1,13 +1,13 @@
 require 'helper'
 
 module Dns
-  module CatlogZone
+  module CatalogZone
     class TestProviderBase < Minitest::Test
       def test_provider_base
         setting = Setting.new('example')
         setting.software = 'base'
-        base = Dns::CatlogZone::Provider::Base.new(setting)
-        assert_instance_of Dns::CatlogZone::Provider::Base,
+        base = Dns::CatalogZone::Provider::Base.new(setting)
+        assert_instance_of Dns::CatalogZone::Provider::Base,
                            base,
                            'create provider base'
         assert base.make(nil)

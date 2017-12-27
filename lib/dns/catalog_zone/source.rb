@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,28 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+require 'dns/catalog_zone/source/base'
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+module Dns
+  module CatalogZone
+    # source module
+    module Source
+      class << self
+        def create(setting)
+          type = setting.source
+          class_name = "Dns::CatalogZone::Source::#{type.ucc}"
+          begin
+            require "dns/catalog_zone/source/#{type}"
+            source = Object.const_get(class_name).new(setting)
+          rescue LoadError
+            raise Dns::CatalogZone::ValidateError, "can't find #{class_name}"
+          rescue NameError
+            raise Dns::CatalogZone::ValidateError, "can't find #{class_name}"
+          end
+          source
+        end
+      end
+      class SourceValidateError < RuntimeError; end
+    end
+  end
 end

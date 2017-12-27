@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Manabu Sonoda
@@ -22,12 +20,40 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-begin
-  require 'dns/catalog_zone'
-  require 'dns/catalog_zone/cli'
+module Dns
+  module CatalogZone
+    module Source
+      class Base
+        attr_reader :rrsets
+        def initialize(setting)
+          @setting = setting
+          @rrsets = []
+        end
 
-  Dns::CatalogZone::Cli.start
-rescue Dns::CatalogZone::ConfigNotFound
-  puts 'config file not found. please run [catz init]'
-  exit 1
+        # get rrsets
+        #
+        # === Returns
+        # rrsets<Array[Dnsruby::RR]>
+        def get
+          []
+        end
+
+        # get rrsets
+        #
+        # === Raise
+        # SourceValidateError>
+        # === Returns
+        # true<TrueClass>
+        def validate
+          begin
+            Dnsruby::Name.create(@setting.zonename)
+          rescue
+            raise SourceValidateError,
+                  "[#{@setting.name}] zonename is not valid domain name."
+          end
+          true
+        end
+      end
+    end
+  end
 end
